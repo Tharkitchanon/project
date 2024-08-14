@@ -1,0 +1,30 @@
+.ai-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .ai-container h2 {
+    color: #333;
+  }
+  
+  .ai-container pre {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  
+  .ai-container h3 {
+    color: #555;
+  }
+  
+  .ai-container p {
+    font-size: 18px;
+    color: #007bff;
+  }
+  
