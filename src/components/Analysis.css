@@ -1,0 +1,85 @@
+/* Analysis.css */
+
+.analysis {
+    background-color: #f0f4f8; /* สีพื้นหลังของหน้า - สีเทาอ่อน */
+    color: #333333; /* สีตัวอักษรที่เข้ม */
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  h1 {
+    color: #222222; /* สีหัวเรื่องที่เข้มกว่า */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #444444; /* สีหัวข้อย่อย */
+    margin-bottom: 15px;
+  }
+  
+  p {
+    color: #555555; /* สีข้อความที่กำลังโหลด */
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* สีพื้นหลังของตาราง */
+    border-radius: 8px; /* มุมโค้งของตาราง */
+    overflow: hidden; /* ซ่อนขอบที่เกินออกจากมุมโค้ง */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาเบา */
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  th {
+    background-color: #e8f4f8; /* สีพื้นหลังของหัวตาราง */
+    color: #444444; /* สีตัวอักษรของหัวตาราง */
+    font-weight: bold;
+    text-transform: uppercase; /* ตัวอักษรพิมพ์ใหญ่ทั้งหมด */
+  }
+  
+  td {
+    background-color: #ffffff; /* สีพื้นหลังของเซลล์ข้อมูล */
+    color: #555555; /* สีตัวอักษรของเซลล์ข้อมูล */
+  }
+  
+  tr:nth-child(even) td {
+    background-color: #f9f9f9; /* สีพื้นหลังของแถวที่คู่ */
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่แถว */
+  }
+ 
+
+  @media (max-width: 768px) {
+    /* สำหรับอุปกรณ์ที่มีขนาดหน้าจอเล็ก */
+    h1 {
+      font-size: 24px;
+    }
+  
+    h2 {
+      font-size: 18px;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  
+    th, td {
+      padding: 8px;
+    }
+  
+
+  }
+  

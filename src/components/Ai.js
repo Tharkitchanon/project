@@ -1,49 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import './Ai.css';
+import axios from 'axios';
+import { FaSpinner } from 'react-icons/fa'; // นำเข้าไอคอนโหลด
+import './Ai.css'; // เชื่อมโยงกับไฟล์ CSS
 
-function Ai() {
-  const [trend, setTrend] = useState('กำลังโหลด...'); // เริ่มต้นด้วยข้อความ "กำลังโหลด..."
+const Ai = () => {
+  const [trend, setTrend] = useState('');
+  const [loading, setLoading] = useState(false); // เพิ่มสถานะ loading
 
-  // ฟังก์ชันการคาดการณ์ (จำลอง)
-  const predictEnergy = async () => {
-    // การคาดการณ์จำลอง
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(Math.random() * 100); // คืนค่าผลลัพธ์คาดการณ์แบบสุ่ม
-      }, 500);
-    });
+  const fetchData = async () => {
+    setLoading(true); // เริ่มต้นการโหลด
+    try {
+      const response = await axios.get('http://127.0.0.1:5000/predict');
+      setTrend(response.data.trend);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+    setLoading(false); // สิ้นสุดการโหลด
   };
 
-  // ดึงข้อมูลและอัปเดตการคาดการณ์ทุกๆ 5 นาที
   useEffect(() => {
-    const interval = setInterval(async () => {
-      const predictedValue = await predictEnergy();
-      console.log(`Predicted Value: ${predictedValue}`);
-      setTrend(prevTrend => {
-        const previousValue = parseFloat(prevTrend.split(' ')[1]);
-        console.log(`Previous Value: ${previousValue}`);
-        if (!isNaN(previousValue)) {
-          return predictedValue > previousValue
-            ? `แนวโน้มเพิ่มขึ้น (${predictedValue.toFixed(2)})`
-            : `แนวโน้มลดลง (${predictedValue.toFixed(2)})`;
-        }
-        return `เริ่มต้น (${predictedValue.toFixed(2)})`;
-      });
-    }, 300000);
-  
+    // Initial fetch
+    fetchData();
+
+    // Set up polling every 30 seconds
+    const interval = setInterval(() => {
+      fetchData();
+    }, 30000);
+
+    // Clear interval on component unmount
     return () => clearInterval(interval);
   }, []);
-  
 
   return (
-    <div className="ai-container">
-      <h2>การคาดการณ์พลังงานแบบเรียลไทม์</h2>
-      <div className="trend-box">
-        <h3>แนวโน้มการเปลี่ยนแปลงพลังงาน:</h3>
-        <p>{trend}</p>
+    <div className="container">
+      <h1>ค่าไฟฟ้าโดยรวม</h1>
+      <div className="info-box">
+        <p>แนวโน้มคือ: {loading ? (
+          <FaSpinner className="spinner" /> // ใช้ไอคอนโหลดจาก React Icons
+        ) : (
+          trend === 'down' ? 'ลดลง' : 'เพิ่มขึ้น'
+        )}</p>
       </div>
+      <button className="button" onClick={fetchData} disabled={loading}>
+        {loading ? (
+          <FaSpinner className="spinner" /> // ใช้ไอคอนโหลดจาก React Icons
+        ) : (
+          'ทำนายใหม่'
+        )}
+      </button>
     </div>
   );
-}
+};
 
 export default Ai;

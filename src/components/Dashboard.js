@@ -3,7 +3,7 @@ import { ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
-import '../App.css'; // ตรวจสอบให้แน่ใจว่าได้เพิ่ม CSS ที่ได้กล่าวถึง
+import './DashBoard.css'; // ตรวจสอบให้แน่ใจว่าได้เพิ่ม CSS ที่ได้กล่าวถึง
 
 const messages = [
   "ปรับแอร์ขึ้น1-2องศาก็ถือว่าประหยัดไฟแล้วน้า",
@@ -17,7 +17,6 @@ const getRandomMessage = () => {
   const randomIndex = Math.floor(Math.random() * messages.length);
   return messages[randomIndex];
 };
-
 
 const Dashboard = () => {
   const [data, setData] = useState({});
@@ -63,8 +62,8 @@ const Dashboard = () => {
         borderWidth: 2,
         fill: false,
         tension: 0.4,
-        pointBackgroundColor: data.map(v => v > 80 ? 'rgba(255, 99, 132, 1)' : borderColor),
-        pointBorderColor: data.map(v => v > 80 ? 'rgba(255, 99, 132, 1)' : borderColor),
+        pointBackgroundColor: data.map(v => v > 4000 ? 'rgba(255, 99, 132, 1)' : borderColor),
+        pointBorderColor: data.map(v => v > 4000 ? 'rgba(255, 99, 132, 1)' : borderColor),
         pointRadius: 4
       }
     ]
@@ -99,7 +98,8 @@ const Dashboard = () => {
         grid: {
           color: 'rgba(255, 255, 255, 0.2)',
         },
-        beginAtZero: true,
+        beginAtZero: false,
+        suggestedMin: 1000, // เปลี่ยนค่าต่ำสุดเป็น 1000
       },
     },
     plugins: {
@@ -111,13 +111,13 @@ const Dashboard = () => {
     },
   };
 
-  const renderValue = (label, value) => {
-    const valueColor = value > 80 ? 'red' : '#ffffff';
+  const renderValue = (label, value, unit) => {
+    const valueColor = value > 4000 ? 'red' : '#ffffff';
 
     return (
       <div className="value-container">
         <h2>{label}</h2>
-        <p style={{ color: valueColor }}>{value}</p>
+        <p style={{ color: valueColor }}>{value} {unit}</p>
       </div>
     );
   };
@@ -142,23 +142,23 @@ const Dashboard = () => {
         </select>
       </div>
       <div className="chart-container">
-        {renderValue('แรงดันไฟฟ้าล่าสุด', voltage[voltage.length - 1])}
+        {renderValue('แรงดันไฟฟ้าล่าสุด', voltage[voltage.length - 1], 'V')}
         <Line data={generateChartData('แรงดันไฟฟ้า', voltage, 'rgba(75, 192, 192, 1)')} options={chartOptions} />
       </div>
       <div className="chart-container">
-        {renderValue('กระแสไฟฟ้าล่าสุด', current[current.length - 1])}
+        {renderValue('กระแสไฟฟ้าล่าสุด', current[current.length - 1], 'A')}
         <Line data={generateChartData('กระแสไฟฟ้า', current, 'rgba(153, 102, 255, 1)')} options={chartOptions} />
       </div>
       <div className="chart-container">
-        {renderValue('กำลังไฟฟ้าล่าสุด', power[power.length - 1])}
+        {renderValue('กำลังไฟฟ้าล่าสุด', power[power.length - 1], 'W')}
         <Line data={generateChartData('กำลังไฟฟ้า', power, 'rgba(255, 159, 64, 1)')} options={chartOptions} />
       </div>
       <div className="chart-container">
-        {renderValue('พลังงานไฟฟ้าล่าสุด', energy[energy.length - 1])}
+        {renderValue('พลังงานไฟฟ้าล่าสุด', energy[energy.length - 1], 'kWh')}
         <Line data={generateChartData('พลังงานไฟฟ้า', energy, 'rgba(54, 162, 235, 1)')} options={chartOptions} />
       </div>
       <div className="chart-container">
-        {renderValue('ค่า power factor ล่าสุด', powerFactor[powerFactor.length - 1])}
+        {renderValue('ค่า power factor ล่าสุด', powerFactor[powerFactor.length - 1], '')}
         <Line data={generateChartData('ค่า power factor', powerFactor, 'rgba(255, 206, 86, 1)')} options={chartOptions} />
       </div>
     </div>

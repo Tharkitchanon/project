@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
-import logo from './ตราสัญลักษณ์โรงเรียนชุมแพศึกษา.jpg'; 
+import logo from './images.png'; 
 import profilePic from './80049447_604546740353064_3161278354296930304_n.jpg';
 
+// Animation Keyframes
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -20,22 +21,24 @@ const pulse = keyframes`
     transform: scale(1);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
   }
 `;
 
+// Styled Components
 const HomePageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  color: #ffffff;
+  color: #333;
   overflow: hidden;
   position: relative;
+  background: #f9f9f9; /* สีพื้นหลังที่นุ่มนวล */
 `;
 
 const Logo = styled.img`
@@ -49,21 +52,23 @@ const Header = styled.h1`
   font-size: 3rem;
   margin-bottom: 20px;
   animation: ${fadeIn} 1s ease-in-out;
-  color: #000000;
+  color: #333;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const SubHeader = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 40px;
-  color: #bb86fc;
+  color: #666;
   animation: ${fadeIn} 1.5s ease-in-out;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const Button = styled.button`
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #121212;
-  background-color: #bb86fc;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background-color: #2196f3; /* สีฟ้า */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -72,7 +77,7 @@ const Button = styled.button`
   margin: 10px;
 
   &:hover {
-    background-color: #3700b3;
+    background-color: #1976d2; /* สีฟ้าเข้มขึ้น */
     transform: scale(1.05);
   }
 `;
@@ -81,7 +86,7 @@ const Footer = styled.footer`
   position: absolute;
   bottom: 20px;
   font-size: 0.8rem;
-  color: #888;
+  color: #333;
   animation: ${fadeIn} 2.5s ease-in-out;
 `;
 
@@ -91,7 +96,7 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  background: #f9f9f9; /* สีพื้นหลังที่นุ่มนวล */
   z-index: -1;
 `;
 
@@ -101,7 +106,7 @@ const Sidebar = styled.div`
   right: 0;
   width: 300px;
   height: 100%;
-  background-color: #121212;
+  background-color: #00796b;
   color: #ffffff;
   box-shadow: -2px 0 5px rgba(0,0,0,0.3);
   transform: translateX(${props => (props.isOpen ? '0' : '100%')});
@@ -127,24 +132,26 @@ const ProfilePic = styled.img`
 `;
 
 const UserEmail = styled.p`
-  font-size: 1.1rem;
-  color: #bb86fc;
+  font-size: 1.2rem;
+  color: #80deea;
 `;
 
 const SidebarHeader = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 20px;
+  color: #ffffff;
 `;
 
 const SidebarLink = styled(Link)`
   display: block;
-  color: #bb86fc;
+  color: #80deea;
   text-decoration: none;
   font-size: 1.2rem;
   margin: 10px 0;
+  transition: color 0.3s ease;
 
   &:hover {
-    color: #3700b3;
+    color: #004d40;
   }
 `;
 
@@ -152,7 +159,7 @@ const MenuButton = styled.button`
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: #bb86fc;
+  background-color: #2196f3; /* สีฟ้า */
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -161,17 +168,17 @@ const MenuButton = styled.button`
   font-size: 1.5rem;
   z-index: 1000;
   transition: background-color 0.3s ease;
-  
+
   &:hover {
-    background-color: #3700b3;
+    background-color: #1976d2; /* สีฟ้าเข้มขึ้น */
   }
 `;
 
 const AnalysisButton = styled(Link)`
   position: absolute;
   top: 20px;
-  right: 80px; /* Adjust button position */
-  background-color: #bb86fc;
+  right: 80px;
+  background-color: #2196f3; /* สีฟ้า */
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -184,15 +191,15 @@ const AnalysisButton = styled(Link)`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #018786;
+    background-color: #1976d2; /* สีฟ้าเข้มขึ้น */
   }
 `;
 
-const ElectricityDisplayButton = styled(Link)`
+const KnowledgePageButton = styled(Link)`
   position: absolute;
-  top: 20px; /* Adjust button position */
-  left: 20px; /* Adjust button position */
-  background-color: #bb86fc;
+  top: 20px;
+  left: 20px;
+  background-color: #2196f3; /* สีฟ้า */
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -205,15 +212,15 @@ const ElectricityDisplayButton = styled(Link)`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #018786;
+    background-color: #1976d2; /* สีฟ้าเข้มขึ้น */
   }
 `;
 
 const AiButton = styled(Link)`
   position: absolute;
-  top: 20px; /* ปรับตำแหน่งปุ่ม */
-  left: 150px; /* ปรับตำแหน่งปุ่ม */
-  background-color: #bb86fc;
+  top: 20px;
+  left: 150px;
+  background-color: #2196f3; /* สีฟ้า */
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -226,7 +233,7 @@ const AiButton = styled(Link)`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #018786;
+    background-color: #1976d2; /* สีฟ้าเข้มขึ้น */
   }
 `;
 
@@ -256,8 +263,8 @@ const HomePage = () => {
       <Header>ยินดีต้อนรับเข้าสู่ระบบตรวจสอบข้อมูลไฟฟ้า</Header>
       <SubHeader>แสดงและวิเคราะห์ข้อมูลไฟฟ้าของคุณ</SubHeader>
       <Button as={Link} to="/dashboard">ไปที่แดชบอร์ด</Button>
-      <ElectricityDisplayButton to="/electricity">แสดงค่าไฟฟ้า</ElectricityDisplayButton>
-      <AiButton to="/Ai">คาดการณ์</AiButton> {/* ปุ่มเชื่อมโยงไปยังหน้า Ai */}
+      <KnowledgePageButton to="/KnowledgePage">คู่มือการประหยัด</KnowledgePageButton>
+      <AiButton to="/Ai">คาดการณ์</AiButton>
       <Footer>&copy; 2024 รอยคิดถึงแฟนเก่า.</Footer>
       
       <MenuButton onClick={toggleSidebar}>

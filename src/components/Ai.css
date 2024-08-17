@@ -1,30 +1,92 @@
-.ai-container {
-    padding: 20px;
-    background-color: #f4f4f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  .ai-container h2 {
-    color: #333;
-  }
-  
-  .ai-container pre {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 4px;
-    overflow-x: auto;
-  }
-  
-  .ai-container h3 {
-    color: #555;
-  }
-  
-  .ai-container p {
-    font-size: 18px;
-    color: #007bff;
-  }
-  
+/* ai.css */
+
+/* ใช้พื้นหลังที่สบายตา */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* สไตล์สำหรับ container หลัก */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px; /* เพิ่มระยะห่างด้านบน */
+}
+
+/* สไตล์สำหรับหัวข้อหลัก */
+h1 {
+  color: #4a90e2;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* สไตล์สำหรับข้อความ */
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 10px 0;
+  color: #666;
+}
+
+/* ปรับให้แนวโน้มและค่า MSE เป็นกล่องที่ดูดี */
+.info-box {
+  background-color: #eaf0f9;
+  border: 1px solid #d0e0f0;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเบา */
+}
+
+.info-box p {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+/* เพิ่มสไตล์สำหรับปุ่ม */
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* เพิ่มการเปลี่ยนสีและการเคลื่อนไหว */
+}
+
+.button:hover {
+  background-color: #357abd;
+  transform: scale(1.05); /* ขยายปุ่มเล็กน้อยเมื่อเลื่อนเมาส์ */
+}
+
+.button:active {
+  background-color: #2a5d9c; /* สีที่เปลี่ยนเมื่อคลิก */
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  font-size: 24px; /* ขนาดของไอคอน */
+  margin-left: 10px; /* ระยะห่างจากข้อความ */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
