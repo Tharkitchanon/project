@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
-import logo from './images.png'; 
+import logo from './Cpss.png'; 
 import profilePic from './80049447_604546740353064_3161278354296930304_n.jpg';
+import backgroundImage from './pexels-pixabay-207489.jpg'; // เพิ่มรูปภาพพื้นหลังของคุณที่นี่
 
 // Animation Keyframes
 const fadeIn = keyframes`
@@ -39,6 +40,9 @@ const HomePageContainer = styled.div`
   overflow: hidden;
   position: relative;
   background: #f9f9f9; /* สีพื้นหลังที่นุ่มนวล */
+  background-image: url(${backgroundImage}); /* ใช้ภาพพื้นหลังที่นี่ */
+  background-size: cover;
+  background-position: center;
 `;
 
 const Logo = styled.img`
@@ -88,16 +92,6 @@ const Footer = styled.footer`
   font-size: 0.8rem;
   color: #333;
   animation: ${fadeIn} 2.5s ease-in-out;
-`;
-
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #f9f9f9; /* สีพื้นหลังที่นุ่มนวล */
-  z-index: -1;
 `;
 
 const Sidebar = styled.div`
@@ -258,7 +252,6 @@ const HomePage = () => {
 
   return (
     <HomePageContainer>
-      <Background />
       <Logo src={logo} alt="Logo" />
       <Header>ยินดีต้อนรับเข้าสู่ระบบตรวจสอบข้อมูลไฟฟ้า</Header>
       <SubHeader>แสดงและวิเคราะห์ข้อมูลไฟฟ้าของคุณ</SubHeader>
